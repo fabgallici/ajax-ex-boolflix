@@ -28,6 +28,8 @@ $(document).ready(function () {
       var lang = arrObjMov[i].original_language;
       var vote = arrObjMov[i].vote_average;
       console.log(title, orig_title, lang, vote);
+      // printMoviesTemp(title, orig_title, lang, vote);
+      $('.movies-result').append('<li>' + 'title: ' + title + ' - orig_title: ' + orig_title + ' - lang: ' + lang + ' - vote: ' + vote + '</li>')
     }
 
   }
