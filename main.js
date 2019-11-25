@@ -32,6 +32,7 @@ $(document).ready(function () {
   var evMovData = function (arrObjMov) {
     //clear container per nuova ricerva
     $('.mov-container.container').empty();
+    //per ogni obj json estraggo titolo, titolo originale, lingua, voto
     for (var i = 0; i < arrObjMov.length; i++) {
       var title = arrObjMov[i].title;
       var orig_title = arrObjMov[i].original_title;
@@ -51,26 +52,32 @@ $(document).ready(function () {
     var htmlMovieData = movieTemplate(movieData);
     $('.mov-container.container').append(htmlMovieData);
   };
-  //concatenazione stringa con +
-  var evSearchData = function (str) {
-    var arr = str.toLowerCase().split(' ');
-    var newStr = arr.join('+');
-    return newStr;
-  }
-  
-  
-  //get input section
-  var getInputData = function() {
-    $('#search-btn').on('click', function () {
-      // console.log('click');
+
+  //SECTION get input and start program
+  var controller = function() {
+    
+    //concatenazione stringa con +
+    var evSearchData = function (str) {
+      var arr = str.toLowerCase().split(' ');
+      var newStr = arr.join('+');
+      return newStr;
+    }
+    //get input field, call convert string, call searchMovie
+    var getInputAndSearch = function() {
       var queryStr = $('#search-input').val();
-      console.log('queryStr', queryStr);
       var evQueryStr = evSearchData(queryStr);
       searchMovie(evQueryStr);
+    }
+    $('#search-btn').on('click', getInputAndSearch);
+
+    $('#search-input').keypress(function(e) {
+      if (e.keyCode ===13 || e.which === 13) {
+        getInputAndSearch();
+      }
     })
   }
   //init program
-  getInputData();
+  controller();
 
 
 
