@@ -1,19 +1,27 @@
 $(document).ready(function () {
 
   const apiKey = "6dd01b7265c335fd46cc94907c9fefc1";
+  const lang_It = "it-IT";
 
   var searchMovie = function (queryStr) {
+    console.log('queryStr', queryStr);
     $.ajax({
       url: "https://api.themoviedb.org/3/search/movie",
       method: "GET",
       data: {
         api_key: apiKey,
-        query: queryStr  //comment debug error:
+        query: queryStr,
+        language: lang_It
       },
       success: function (data) {
         var results = data.results;
         console.log(results);
-        evMovData(results);
+        if (results.length > 0) {
+          evMovData(results);
+        } else {
+          console.log('no results found');
+        }
+        
       },
       error: function (error) {
         console.log("error: ", error);
@@ -38,13 +46,20 @@ $(document).ready(function () {
 
   };
 
-
-  console.log('prova');
+  var evSearchData = function (str) {
+    var arr = str.toLowerCase().split(' ');
+    var newStr = arr.join('+');
+    return newStr;
+  }
+  
+  //init program
+  //get input section
   $('#search-btn').on('click', function () {
     // console.log('click');
     var queryStr = $('#search-input').val();
-    // console.log(queryStr);
-    searchMovie(queryStr);
+    console.log('queryStr', queryStr);
+    var evQueryStr = evSearchData(queryStr);
+    searchMovie(evQueryStr);
   })
 
 
