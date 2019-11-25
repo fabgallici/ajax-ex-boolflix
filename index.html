@@ -14,10 +14,21 @@
   <button id="search-btn">SEARCH MOVIE</button>
 
   <ul class="movies-result"></ul>
+  <div class="mov-container container"></div>
+
+    <!-- music template handlebars -->
+  <script id="movie-template" type="text/x-handlebars-template">
+    <div class="mov">
+      <h3>{{title}}</h3>
+      <span class="mov-orig-title">{{orig_title}}</span>
+      <span class="mov-lang">{{lang}}</span>
+      <span class="mov-vote">{{vote}}</span>
+    </div>
+  </script>
 
   
 
-    
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.4.2/handlebars.js"></script> 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="main.js"></script>
 </body>

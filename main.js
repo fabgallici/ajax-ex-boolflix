@@ -36,14 +36,18 @@ $(document).ready(function () {
       var lang = arrObjMov[i].original_language;
       var vote = arrObjMov[i].vote_average;
       console.log(title, orig_title, lang, vote);
-      // printMoviesTemp(title, orig_title, lang, vote);
-      $('.movies-result').append('<li>' + 'title: ' + title + ' - orig_title: ' + orig_title + ' - lang: ' + lang + ' - vote: ' + vote + '</li>')
+      printMoviesTemp(title, orig_title, lang, vote);
+      // $('.movies-result').append('<li>' + 'title: ' + title + ' - orig_title: ' + orig_title + ' - lang: ' + lang + ' - vote: ' + vote + '</li>')
     }
 
   }
 
-  var printMoviesTemp = function (objMov) {
-
+  var printMoviesTemp = function (title, orig_title, lang, vote) {
+    var source = document.getElementById('movie-template').innerHTML;
+    var movieTemplate = Handlebars.compile(source);
+    var movieData = { title: title, orig_title: orig_title, lang: lang, vote: vote };
+    var htmlMovieData = movieTemplate(movieData);
+    $('.mov-container.container').append(htmlMovieData);
   };
 
   var evSearchData = function (str) {
@@ -54,13 +58,17 @@ $(document).ready(function () {
   
   //init program
   //get input section
-  $('#search-btn').on('click', function () {
-    // console.log('click');
-    var queryStr = $('#search-input').val();
-    console.log('queryStr', queryStr);
-    var evQueryStr = evSearchData(queryStr);
-    searchMovie(evQueryStr);
-  })
+  var getInputData = function() {
+    $('#search-btn').on('click', function () {
+      // console.log('click');
+      var queryStr = $('#search-input').val();
+      console.log('queryStr', queryStr);
+      var evQueryStr = evSearchData(queryStr);
+      searchMovie(evQueryStr);
+    })
+  }
+
+  getInputData();
 
 
 
