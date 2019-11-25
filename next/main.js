@@ -59,17 +59,22 @@ $(document).ready(function () {
       // console.log(title, orig_title, lang, vote);
       //print mov values with starRating vote
       var lang_flag = "img/Phoca/" + lang + ".png";
-      printMoviesTemp(title, orig_title, lang_flag, starRating(vote));
+      printMoviesTemp(title, orig_title, lang, lang_flag, starRating(vote));
       // $('.movies-result').append('<li>' + 'title: ' + title + ' - orig_title: ' + orig_title + ' - lang: ' + lang + ' - vote: ' + vote + '</li>')
     }
+    //gestione errore lang flag img not found
+    $('.mov img').on('error', function () {
+      console.log('img error');
+      $(this).siblings('.mov-lang').addClass('show-text');
+    })
 
   }
 
   //SECTION UI: visualizza dati film creando nuovo template handlebars
-  var printMoviesTemp = function (title, orig_title, lang, vote) {
+  var printMoviesTemp = function (title, orig_title, lang, lang_flag, vote) {
     var source = document.getElementById('movie-template').innerHTML;
     var movieTemplate = Handlebars.compile(source);
-    var movieData = { title: title, orig_title: orig_title, lang: lang, vote: vote };
+    var movieData = { title: title, orig_title: orig_title, lang: lang, lang_flag: lang_flag, vote: vote };
     var htmlMovieData = movieTemplate(movieData);
     $('.mov-container.container').append(htmlMovieData);
   };
@@ -96,11 +101,11 @@ $(document).ready(function () {
         getInputAndSearch();
       }
     })
-    //non funziona, con click al posto di error funziona
-    $('.mov-container').on('error', 'img', function() {
-      console.log('img error');
-      // $(this).closest('.mov-lang').html('test');
-    })
+    //non funziona con delegation, con click al posto di error funziona 
+    // $('.mov-container').on('error', 'img', function() {
+    //   console.log('img error');
+    //   // $(this).closest('.mov-lang').html('test');
+    // })
   }
   //init program
   controller();

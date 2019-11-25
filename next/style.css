@@ -62,3 +62,9 @@ header {
 .mov-vote .black {
   color: #000;
 }
+.mov-lang {
+  font-size: 0;
+}
+.show-text {
+  font-size: 16px;
+}
