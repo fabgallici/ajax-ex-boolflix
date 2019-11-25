@@ -1,6 +1,6 @@
 $(document).ready(function () {
 
-  
+
   //SECTION Ajax call ricerca query
   var searchMovie = function (queryStr) {
     const apiKey = "6dd01b7265c335fd46cc94907c9fefc1";
@@ -18,11 +18,11 @@ $(document).ready(function () {
         var results = data.results;
         console.log(results);
         if (results.length > 0) {
-          evMovData(results);
+          evMovData(results);  //elaborazione dati
         } else {
           console.log('no results found');
         }
-        
+
       },
       error: function (error) {
         console.log("error: ", error);
@@ -32,8 +32,7 @@ $(document).ready(function () {
 
   //SECTION EVDATA: estrazione dati da array di oggetti results e invio dati a video per ogni elemento.
   var evMovData = function (arrObjMov) {
-    const supported_flags = ['it', 'en', 'fr', 'de', 'es', 'fi', 'be', 'cz', 'da', 'ja', 'zh'];
-    var lang_flag;
+    const supported_flags = ['it', 'en', 'fr', 'de', 'es', 'fi', 'be', 'cz', 'jp', 'us'];
     //transformo vote in num intero da 1 a 5, creando una stringa con relative stelle fontawesome colorate e restanti vuote.
     var starRating = function (vote) {
       const voteNumBase = 10;
@@ -50,6 +49,15 @@ $(document).ready(function () {
       }
       return starsHtml;
     }
+    //controllo flag: se lang supportata ritorno stringa per img attr flag corrispondente atrimenti attr not found
+    var checkFlag = function (lang) {
+      if (supported_flags.includes(lang)) {
+        return "img/flags/" + lang + ".png";
+      } else {
+        return "img/flags/not_found.png";
+      }
+    }
+    //INIZIO EV DATA
     //clear container per nuova ricerva
     $('.mov-container.container').empty();
     //per ogni obj json estraggo titolo, titolo originale, lingua, voto
@@ -59,38 +67,24 @@ $(document).ready(function () {
       var lang = arrObjMov[i].original_language;
       var vote = arrObjMov[i].vote_average;
       // console.log(title, orig_title, lang, vote);
-      console.log("lang", lang);
-      //print mov values with starRating vote
-      // var lang_flag = "img/Phoca/" + lang + ".png";
-      if (supported_flags.includes(lang)) {
-        console.log('i exist!!!!');
-        lang_flag = "img/Phoca/" + lang + ".png";
-      } else {
-        lang_flag = "";
-      }
-      console.log('lang flag', lang_flag);
-      printMoviesTemp(title, orig_title, lang, lang_flag, starRating(vote));
+      var lang_flag = checkFlag(lang);
+      printMoviesTemp(title, orig_title, lang_flag, starRating(vote));
       // $('.movies-result').append('<li>' + 'title: ' + title + ' - orig_title: ' + orig_title + ' - lang: ' + lang + ' - vote: ' + vote + '</li>')
     }
-    //gestione errore lang flag img not found da rivedere
-    $('.mov img').on('error', function () {
-      console.log('img error');
-      $(this).siblings('.mov-lang').addClass('show-text');
-    })
 
   }
 
   //SECTION UI: visualizza dati film creando nuovo template handlebars
-  var printMoviesTemp = function (title, orig_title, lang, lang_flag, vote) {
+  var printMoviesTemp = function (title, orig_title, lang_flag, vote) {
     var source = document.getElementById('movie-template').innerHTML;
     var movieTemplate = Handlebars.compile(source);
-    var movieData = { title: title, orig_title: orig_title, lang: lang, lang_flag: lang_flag, vote: vote };
+    var movieData = { title: title, orig_title: orig_title, lang_flag: lang_flag, vote: vote };
     var htmlMovieData = movieTemplate(movieData);
     $('.mov-container.container').append(htmlMovieData);
   };
 
   //SECTION controller: get input and start program
-  var controller = function() {
+  var controller = function () {
 
     //concatenazione stringa con +
     var evInput = function (str) {
@@ -99,30 +93,23 @@ $(document).ready(function () {
       return newStr;
     }
     //get input field, call convert string, call searchMovie
-    var getInputAndSearch = function() {
+    var getInputAndSearch = function () {
       var queryStr = $('#search-input').val();
       var evQueryStr = evInput(queryStr);
       searchMovie(evQueryStr);
     }
     $('#search-btn').on('click', getInputAndSearch);
 
-    $('#search-input').keypress(function(e) {
-      if (e.keyCode ===13 || e.which === 13) {
+    $('#search-input').keypress(function (e) {
+      if (e.keyCode === 13 || e.which === 13) {
         getInputAndSearch();
       }
     })
-    //non funziona con delegation, con click al posto di error funziona 
-    // $('.mov-container').on('error', 'img', function() {
-    //   console.log('img error');
-    //   // $(this).closest('.mov-lang').html('test');
-    // })
+
   }
   //init program
+  
   controller();
-
-
-
-
 
 
 });
@@ -131,4 +118,17 @@ $(document).ready(function () {
 
 
 
+
 // https://api.themoviedb.org/3/search/movie?api_key=6dd01b7265c335fd46cc94907c9fefc1&query=ritorno+al+futuro
+
+    //gestione errore lang flag img not found da rivedere
+    // $('.mov img').on('error', function () {
+    //   console.log('img error');
+    //   $(this).siblings('.mov-lang').addClass('show-text');
+    // })
+
+        //non funziona con delegation, con click al posto di error funziona 
+    // $('.mov-container').on('error', 'img', function() {
+    //   console.log('img error');
+    //   // $(this).closest('.mov-lang').html('test');
+    // })
