@@ -1,10 +1,11 @@
 $(document).ready(function () {
 
-  const apiKey = "6dd01b7265c335fd46cc94907c9fefc1";
-  const lang_It = "it-IT";
-  //ajax call ricerca query
+  
+  //SECTION Ajax call ricerca query
   var searchMovie = function (queryStr) {
-    console.log('queryStr', queryStr);
+    const apiKey = "6dd01b7265c335fd46cc94907c9fefc1";
+    const lang_It = "it-IT";
+    // console.log('queryStr', queryStr);
     $.ajax({
       url: "https://api.themoviedb.org/3/search/movie",
       method: "GET",
@@ -28,8 +29,25 @@ $(document).ready(function () {
       }
     });
   };
-  //estrazione dati da array di oggetti results e invio dati a video per ogni elemento.
+
+  //SECTION EVDATA: estrazione dati da array di oggetti results e invio dati a video per ogni elemento.
   var evMovData = function (arrObjMov) {
+    //transformo vote in num intero da 1 a 5, creando una stringa con relative stelle fontawesome colorate e restanti vuote.
+    var starRating = function (vote) {
+      const voteNumBase = 10;
+      const maxStars = 5;
+      var starsHtml = "";
+      var starsVote = parseInt((vote * maxStars) / voteNumBase);
+      for (var i = 1; i <= maxStars; i++) {
+        if (starsVote > 0) {
+          starsHtml += '<i class="fas fa-star yellow"></i>';
+          starsVote--;
+        } else {
+          starsHtml += '<i class="fas fa-star black"></i>';
+        }
+      }
+      return starsHtml;
+    }
     //clear container per nuova ricerva
     $('.mov-container.container').empty();
     //per ogni obj json estraggo titolo, titolo originale, lingua, voto
@@ -38,12 +56,14 @@ $(document).ready(function () {
       var orig_title = arrObjMov[i].original_title;
       var lang = arrObjMov[i].original_language;
       var vote = arrObjMov[i].vote_average;
-      console.log(title, orig_title, lang, vote);
-      printMoviesTemp(title, orig_title, lang, vote);
+      // console.log(title, orig_title, lang, vote);
+      //print mov values with starRating vote
+      printMoviesTemp(title, orig_title, lang, starRating(vote));
       // $('.movies-result').append('<li>' + 'title: ' + title + ' - orig_title: ' + orig_title + ' - lang: ' + lang + ' - vote: ' + vote + '</li>')
     }
 
   }
+  
   //SECTION UI: visualizza dati film creando nuovo template handlebars
   var printMoviesTemp = function (title, orig_title, lang, vote) {
     var source = document.getElementById('movie-template').innerHTML;
@@ -57,7 +77,7 @@ $(document).ready(function () {
   var controller = function() {
 
     //concatenazione stringa con +
-    var evSearchData = function (str) {
+    var evInput = function (str) {
       var arr = str.toLowerCase().split(' ');
       var newStr = arr.join('+');
       return newStr;
@@ -65,7 +85,7 @@ $(document).ready(function () {
     //get input field, call convert string, call searchMovie
     var getInputAndSearch = function() {
       var queryStr = $('#search-input').val();
-      var evQueryStr = evSearchData(queryStr);
+      var evQueryStr = evInput(queryStr);
       searchMovie(evQueryStr);
     }
     $('#search-btn').on('click', getInputAndSearch);
