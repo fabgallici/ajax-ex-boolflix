@@ -2,7 +2,7 @@ $(document).ready(function () {
 
   const apiKey = "6dd01b7265c335fd46cc94907c9fefc1";
   const lang_It = "it-IT";
-
+  //ajax call ricerca query
   var searchMovie = function (queryStr) {
     console.log('queryStr', queryStr);
     $.ajax({
@@ -28,8 +28,10 @@ $(document).ready(function () {
       }
     });
   };
-
+  //estrazione dati da array di oggetti results e invio dati a video per ogni elemento.
   var evMovData = function (arrObjMov) {
+    //clear container per nuova ricerva
+    $('.mov-container.container').empty();
     for (var i = 0; i < arrObjMov.length; i++) {
       var title = arrObjMov[i].title;
       var orig_title = arrObjMov[i].original_title;
@@ -41,7 +43,7 @@ $(document).ready(function () {
     }
 
   }
-
+  //visualizza dati film creando nuovo template handlebars
   var printMoviesTemp = function (title, orig_title, lang, vote) {
     var source = document.getElementById('movie-template').innerHTML;
     var movieTemplate = Handlebars.compile(source);
@@ -49,14 +51,14 @@ $(document).ready(function () {
     var htmlMovieData = movieTemplate(movieData);
     $('.mov-container.container').append(htmlMovieData);
   };
-
+  //concatenazione stringa con +
   var evSearchData = function (str) {
     var arr = str.toLowerCase().split(' ');
     var newStr = arr.join('+');
     return newStr;
   }
   
-  //init program
+  
   //get input section
   var getInputData = function() {
     $('#search-btn').on('click', function () {
@@ -67,7 +69,7 @@ $(document).ready(function () {
       searchMovie(evQueryStr);
     })
   }
-
+  //init program
   getInputData();
 
 

@@ -21,12 +21,12 @@
 
     <!-- music template handlebars -->
   <script id="movie-template" type="text/x-handlebars-template">
-    <div class="mov">
-      <h3>{{title}}</h3>
-      <span class="mov-orig-title">{{orig_title}}</span>
-      <span class="mov-lang">{{lang}}</span>
-      <span class="mov-vote">{{vote}}</span>
-    </div>
+    <ul class="mov">
+      <li><span class="mov-val">Titolo: </span><span class="mov-title">{{title}}</span></li>
+      <li><span class="mov-val">Titolo originale: </span><span class="mov-orig-title">{{orig_title}}</span></li>
+      <li><span class="mov-val">Lingua: </span><span class="mov-lang">{{lang}}</span></li>
+      <li><span class="mov-val">Voto: </span><span class="mov-vote">{{vote}}</span></li>
+    </ul>
   </script>
 
   
