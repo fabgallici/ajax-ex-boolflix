@@ -32,6 +32,8 @@ $(document).ready(function () {
 
   //SECTION EVDATA: estrazione dati da array di oggetti results e invio dati a video per ogni elemento.
   var evMovData = function (arrObjMov) {
+    const supported_flags = ['it', 'en', 'fr', 'de', 'es', 'fi', 'be', 'cz', 'da', 'ja', 'zh'];
+    var lang_flag;
     //transformo vote in num intero da 1 a 5, creando una stringa con relative stelle fontawesome colorate e restanti vuote.
     var starRating = function (vote) {
       const voteNumBase = 10;
@@ -57,12 +59,20 @@ $(document).ready(function () {
       var lang = arrObjMov[i].original_language;
       var vote = arrObjMov[i].vote_average;
       // console.log(title, orig_title, lang, vote);
+      console.log("lang", lang);
       //print mov values with starRating vote
-      var lang_flag = "img/Phoca/" + lang + ".png";
+      // var lang_flag = "img/Phoca/" + lang + ".png";
+      if (supported_flags.includes(lang)) {
+        console.log('i exist!!!!');
+        lang_flag = "img/Phoca/" + lang + ".png";
+      } else {
+        lang_flag = "";
+      }
+      console.log('lang flag', lang_flag);
       printMoviesTemp(title, orig_title, lang, lang_flag, starRating(vote));
       // $('.movies-result').append('<li>' + 'title: ' + title + ' - orig_title: ' + orig_title + ' - lang: ' + lang + ' - vote: ' + vote + '</li>')
     }
-    //gestione errore lang flag img not found
+    //gestione errore lang flag img not found da rivedere
     $('.mov img').on('error', function () {
       console.log('img error');
       $(this).siblings('.mov-lang').addClass('show-text');
