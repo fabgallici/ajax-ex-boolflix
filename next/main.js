@@ -58,12 +58,13 @@ $(document).ready(function () {
       var vote = arrObjMov[i].vote_average;
       // console.log(title, orig_title, lang, vote);
       //print mov values with starRating vote
-      printMoviesTemp(title, orig_title, lang, starRating(vote));
+      var lang_flag = "img/Phoca/" + lang + ".png";
+      printMoviesTemp(title, orig_title, lang_flag, starRating(vote));
       // $('.movies-result').append('<li>' + 'title: ' + title + ' - orig_title: ' + orig_title + ' - lang: ' + lang + ' - vote: ' + vote + '</li>')
     }
 
   }
-  
+
   //SECTION UI: visualizza dati film creando nuovo template handlebars
   var printMoviesTemp = function (title, orig_title, lang, vote) {
     var source = document.getElementById('movie-template').innerHTML;
@@ -94,6 +95,11 @@ $(document).ready(function () {
       if (e.keyCode ===13 || e.which === 13) {
         getInputAndSearch();
       }
+    })
+    //non funziona, con click al posto di error funziona
+    $('.mov-container').on('error', 'img', function() {
+      console.log('img error');
+      // $(this).closest('.mov-lang').html('test');
     })
   }
   //init program
