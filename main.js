@@ -41,10 +41,8 @@ var evMovData = function (arrObjMov) {
     }
   }
   //INIZIO EV DATA
-  //clear container per nuova ricerva
-  $('.mov-container.container').empty();
-  //per ogni obj json estraggo titolo, titolo originale, lingua, voto
-  var printMovies = printMoviesTemp();
+  var printMovies = printMoviesTemp(); // compile handlebars
+  //per ogni obj json estraggo titolo, titolo originale, lingua, voto 
   for (var i = 0; i < arrObjMov.length; i++) {
     var title = arrObjMov[i].title || arrObjMov[i].name;
     var orig_title = arrObjMov[i].original_title || arrObjMov[i].original_name;
@@ -52,7 +50,7 @@ var evMovData = function (arrObjMov) {
     var vote = arrObjMov[i].vote_average;
     // console.log('title:', title, 'orig_title: ' + orig_title, 'lang ', lang, vote);
     var lang_flag = checkFlag(lang);   
-    printMovies(title, orig_title, lang_flag, starRating(vote));
+    printMovies(title, orig_title, lang_flag, starRating(vote));  //print with Handlebars
     // $('.movies-result').append('<li>' + 'title: ' + title + ' - orig_title: ' + orig_title + ' - lang: ' + lang + ' - vote: ' + vote + '</li>')
   }
 
@@ -75,8 +73,9 @@ var searchMovie = function (queryStr, type_src) {
       var results = data.results;
       console.log(results);
       if (results.length > 0) {
-        $('#search-input').val('');
-        evMovData(results);  //elaborazione dati
+        $('.mov-container.container').empty(); //clear container dopo nuova ricerva positiva
+        $('#search-input').val(''); //cancellazione campo input dopo ricerca positiva
+        evMovData(results);  //elaborazione dati e successivo invio a schermo
       } else {
         console.log('no results found');
       }
@@ -104,7 +103,7 @@ $(document).ready(function () {
     var getInputAndSearch = function () {
       var queryStr = $('#search-input').val();
       var evQueryStr = evInput(queryStr);
-      searchMovie(evQueryStr, mov_src);
+      searchMovie(evQueryStr, mov_src);  //invio dati per ricerca film e poi serie tv
       searchMovie(evQueryStr, tv_src);
     }
     $('#search-btn').on('click', getInputAndSearch);
