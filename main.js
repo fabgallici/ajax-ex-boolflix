@@ -2,12 +2,12 @@ $(document).ready(function () {
 
 
   //SECTION Ajax call ricerca query
-  var searchMovie = function (queryStr) {
+  var searchMovie = function (queryStr, type_src) {
     const apiKey = "6dd01b7265c335fd46cc94907c9fefc1";
     const lang_It = "it-IT";
     // console.log('queryStr', queryStr);
     $.ajax({
-      url: "https://api.themoviedb.org/3/search/movie",
+      url: "https://api.themoviedb.org/3/search/" + type_src,
       method: "GET",
       data: {
         api_key: apiKey,
@@ -18,6 +18,7 @@ $(document).ready(function () {
         var results = data.results;
         console.log(results);
         if (results.length > 0) {
+          $('#search-input').val('');
           evMovData(results);  //elaborazione dati
         } else {
           console.log('no results found');
@@ -62,11 +63,11 @@ $(document).ready(function () {
     $('.mov-container.container').empty();
     //per ogni obj json estraggo titolo, titolo originale, lingua, voto
     for (var i = 0; i < arrObjMov.length; i++) {
-      var title = arrObjMov[i].title;
-      var orig_title = arrObjMov[i].original_title;
+      var title = arrObjMov[i].title || arrObjMov[i].name;
+      var orig_title = arrObjMov[i].original_title || arrObjMov[i].original_name;
       var lang = arrObjMov[i].original_language;
       var vote = arrObjMov[i].vote_average;
-      // console.log(title, orig_title, lang, vote);
+      console.log('title:', title,'orig_title: ' +  orig_title,'lang ',  lang, vote);
       var lang_flag = checkFlag(lang);
       printMoviesTemp(title, orig_title, lang_flag, starRating(vote));
       // $('.movies-result').append('<li>' + 'title: ' + title + ' - orig_title: ' + orig_title + ' - lang: ' + lang + ' - vote: ' + vote + '</li>')
@@ -85,7 +86,8 @@ $(document).ready(function () {
 
   //SECTION controller: get input and start program
   var controller = function () {
-
+    var mov_src = "movie";
+    var tv_src = "tv";
     //concatenazione stringa con +
     var evInput = function (str) {
       var arr = str.toLowerCase().split(' ');
@@ -96,7 +98,8 @@ $(document).ready(function () {
     var getInputAndSearch = function () {
       var queryStr = $('#search-input').val();
       var evQueryStr = evInput(queryStr);
-      searchMovie(evQueryStr);
+      searchMovie(evQueryStr, mov_src);
+      searchMovie(evQueryStr, tv_src);
     }
     $('#search-btn').on('click', getInputAndSearch);
 
