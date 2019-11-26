@@ -1,0 +1,222 @@
+* {
+  margin: 0;
+  padding: 0;
+  font-family: "Lato", sans-serif;
+  box-sizing: border-box;
+}
+
+body {
+  /* background: rgb(46, 58, 70); */
+    background-color: #425365;
+
+  min-height: 100vh;
+}
+
+header {
+  width: 100%;
+  height: 70px;
+  /* background: rgb(46, 58, 70); */
+  background: #1e2d3b;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.container {
+  /* width: 1070px; */
+  /* width: 1368px; */
+  height: 100%;
+  margin: 0 auto;
+
+  max-width: 1368px;
+  width: 90%;
+}
+
+.mov-container {
+  display: flex;
+  justify-content: center;
+  /* align-items: center; */
+  flex-wrap: wrap;
+  padding: 50px 0;
+  /* align-content: flex-start; */
+  /* align-items: stretch; */
+  align-items: flex-start;
+}
+/* .mov-container .card-outside {
+
+} */
+.mov-container .card {
+  /* padding: 10px; */
+  /* flex-basis: 25%; */
+  /* height: 513px; */
+  flex-basis: 21%;
+  margin-left: 2%;
+  margin-right: 2%;
+  margin-bottom: 4%;
+  
+  /* min-height: 280px; */
+  /* padding-top: 2.5%;
+  padding-bottom: 3%;
+  padding-left: 1.5%;
+  padding-right: 1.5%; */
+  /* max-height: 455px; */
+    background-color: #354250;
+  border: 2px solid black;
+  border-radius: 10px;
+  /* height: 100%; */
+  padding: 10px;
+  /* transition: all 0.5s ease; */
+  transition: opacity 0.5s ease;
+}
+.card-container {
+  position: relative;
+  /* background-size: cover;
+  background-repeat: no-repeat; */
+  /* width: 200px;
+  height: 300px; */
+
+  /* width: 342px;
+  height: 513px; */
+
+
+  height: 0;
+  overflow: hidden;
+  padding-top: 160%;
+  /* width: 100%; */
+    /* margin: auto; */
+
+}
+.card-layover {
+    position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  /* background-color: green; */
+}
+.card-inner {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  /* display: none; */
+  opacity: 0;
+  padding: 10px 0px;
+  transition: all 0.5s ease;
+}
+.mov {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: space-around;
+  width: 100%;
+  padding: 20px;
+  height: 100%;
+  background: #1e2d3b;
+  text-align: center;
+  color: white;
+  border-radius: 10px;
+}
+.card:hover .card-inner {
+  /* display: block; */
+  opacity: 1;
+}
+.card-container .poster {
+  /* position: relative;
+  height: 100%; */
+  height: 100%;
+  /* width: 100%;
+  margin: auto; */
+  text-align: center;
+}
+/* serve helper per centrare poster-img vertical */
+/* vertical aling necessario per layout */
+.poster .post-align {
+  display: inline-block;
+  height: 100%;
+  vertical-align: middle;
+}
+.poster .poster-img {
+  /* position: absolute; */
+  /* top: 50%;
+  left: 0;
+  transform: translateY(-50%); */
+  max-width: 100%;
+  /* max-height: 447px; */
+  margin: auto;
+  /* height: 100%; */
+  /* max-width: 342px;
+  max-height: 513px; */
+
+  border-radius: 10px;
+
+  /* height: auto;  */
+  vertical-align: middle;
+}
+.card:hover .poster {
+  /* display: none; */
+  visibility: hidden;
+}
+.card:hover {
+-webkit-box-shadow: 6px 6px 6px 1px rgba(0,0,0,0.65);
+-moz-box-shadow: 6px 6px 6px 1px rgba(0,0,0,0.65);
+box-shadow: 6px 6px 6px 1px rgba(0,0,0,0.65)
+}
+.mov li {
+  list-style-type: none;
+}
+.mov-val {
+  font-weight: bold;
+  text-decoration: underline;
+}
+.mov-vote .yellow {
+  color: yellow;
+}
+.mov-vote .black {
+  color: #000;
+}
+/* .mov-lang {
+  font-size: 0;
+} */
+/* .show-text {
+  font-size: 16px;
+} */
+
+/* XLarge xlg */
+/* @media screen and (min-width:1200px) {
+
+} */
+/* Large lg */
+/* @media screen and (min-width:992px) and (max-width:1199px) {
+  .container .card {
+    flex-basis: 33%;
+  }
+} */
+/* Medium md */
+@media screen and (min-width:768px) and (max-width:1024px) {
+  .container .card {
+    /* flex-basis: 33%; */
+    flex-basis: 29%;
+  }
+}
+/* Small xs */
+@media screen and (min-width:576px) and (max-width:767px) {
+  .container .card {
+    /* flex-basis: 50%; */
+    flex-basis: 46%;
+    /* padding-bottom: 6%; */
+  }
+}
+/* Extra Small xxs */
+@media screen and (max-width:575px) {
+  .container .card {
+    /* flex-basis: 100%; */
+    flex-basis: 94%;
+    /* padding-bottom: 6%; */
+    min-width: 200px;
+  }
+  .card-container {
+    padding-top: 145%;
+  }
+}
