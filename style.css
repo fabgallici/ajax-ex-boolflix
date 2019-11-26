@@ -70,13 +70,22 @@ header {
 .card-container:hover .card {
   display: block;
 }
-/* .card-container .poster {
+.card-container .poster {
+  position: relative;
   height: 100%;
-} */
-.card-container .poster-img {
+
+}
+.poster .poster-img {
+  position: absolute;
   width: 100%;
-  height: auto;
-  /* vertical-align: middle; */
+  max-width: 342px;
+  max-height: 100%;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+
+  /* height: auto; 
+  vertical-align: middle; */
 }
 .card-container:hover .poster {
   display: none;
