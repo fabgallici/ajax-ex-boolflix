@@ -62,7 +62,8 @@ var evMovData = function (arrObjMov) {
     console.log('title:', title, 'orig_title: ' + orig_title, 'lang ', lang, vote, "poster-img: ", poster_img);
     var lang_flag = checkFlag(lang);   
     printMovies(title, orig_title, lang_flag, starRating(vote));  //print with Handlebars
-
+    //alla card appena creata aggiungo l'img di background se presente;
+    $('.mov-container .mov').last().css({'background-image': 'url(' + poster_img + ')'});
     // $('.movies-result').append('<li>' + 'title: ' + title + ' - orig_title: ' + orig_title + ' - lang: ' + lang + ' - vote: ' + vote + '</li>')
   }
 
@@ -85,7 +86,9 @@ var searchMovie = function (queryStr, type_src) {
       var results = data.results;
       console.log(results);
       if (results.length > 0) {
-        $('.mov-container.container').empty(); //clear container dopo nuova ricerva positiva
+        if (type_src === "movie") { //ad ogni ricerca di movie cancello tutte le ricerche precedenti
+          $('.mov-container.container').empty(); 
+        }     
         $('#search-input').val(''); //cancellazione campo input dopo ricerca positiva
         evMovData(results);  //elaborazione dati e successivo invio a schermo
       } else {
