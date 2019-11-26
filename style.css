@@ -21,7 +21,8 @@ header {
 }
 
 .container {
-  width: 1070px;
+  /* width: 1070px; */
+  width: 1368px;
   height: 100%;
   margin: 0 auto;
 }
@@ -35,10 +36,12 @@ header {
 }
 .card-container {
   position: relative;
-  background-size: cover;
-  background-repeat: no-repeat;
-  width: 200px;
-  height: 300px;
+  /* background-size: cover;
+  background-repeat: no-repeat; */
+  /* width: 200px;
+  height: 300px; */
+  width: 342px;
+  height: 513px;
 }
 .card {
   position: absolute;
@@ -63,6 +66,17 @@ header {
 }
 .card-container:hover .card {
   display: block;
+}
+/* .card-container .poster {
+  height: 100%;
+} */
+.card-container .poster-img {
+  width: 100%;
+  height: auto;
+  /* vertical-align: middle; */
+}
+.card-container:hover .poster {
+  display: none;
 }
 .mov li {
   list-style-type: none;

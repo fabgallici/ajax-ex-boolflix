@@ -6,8 +6,8 @@ var printMoviesTemp = function () {
   var source = document.getElementById('movie-template').innerHTML; //compilazione handle esterna per opt
   var movieTemplate = Handlebars.compile(source);
 
-  return function (title, orig_title, lang_flag, vote) { //ritorna funz per riempire contenuto
-    var movieData = { title: title, orig_title: orig_title, lang_flag: lang_flag, vote: vote };
+  return function (title, orig_title, lang_flag, vote, poster_img) { //ritorna funz per riempire contenuto
+    var movieData = { title: title, orig_title: orig_title, lang_flag: lang_flag, vote: vote, poster_img: poster_img };
     var htmlMovieData = movieTemplate(movieData);
     $('.mov-container.container').append(htmlMovieData);
   };
@@ -60,10 +60,11 @@ var evMovData = function (arrObjMov) {
     var vote = arrObjMov[i].vote_average;  
     // console.log('title:', title, 'orig_title: ' + orig_title, 'lang ', lang, vote, "poster-img: ", poster_img);
     var lang_flag = checkFlag(lang);   
-    printMovies(title, orig_title, lang_flag, starRating(vote));  //print with Handlebars
     //alla card appena creata aggiungo l'img di background se presente o img default;
     var poster_img = checkPosterImg(arrObjMov[i].poster_path);
-    $('.mov-container .card-container').last().css({'background-image': 'url(' + poster_img + ')'});
+    printMovies(title, orig_title, lang_flag, starRating(vote), poster_img);  //print with Handlebars
+    
+    // $('.mov-container .card-container').last().css({'background-image': 'url(' + poster_img + ')'});
     // $('.movies-result').append('<li>' + 'title: ' + title + ' - orig_title: ' + orig_title + ' - lang: ' + lang + ' - vote: ' + vote + '</li>')
   }
 
