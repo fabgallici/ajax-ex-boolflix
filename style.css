@@ -62,7 +62,8 @@ header {
   height: 100%;
   width: 100%;
   display: none;
-  padding: 10px;
+  padding: 20px;
+  
 }
 .mov {
   display: flex;
@@ -79,6 +80,7 @@ header {
   background: #1e2d3b;
   text-align: center;
   color: white;
+  border-radius: 10px;
 }
 .card-container:hover .card-inner {
   display: block;
