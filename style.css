@@ -61,20 +61,18 @@ header {
   left: 0;
   height: 100%;
   width: 100%;
-  display: none;
-  padding: 20px;
+  /* display: none; */
+  opacity: 0;
+  padding: 20px 10px;
+  transition: all 0.5s ease;
 }
 .mov {
   display: flex;
   align-items: center;
   flex-direction: column;
   justify-content: space-around;
-  /* flex-basis: 200px; */
   width: 100%;
   padding: 20px;
-  /* margin: 10px 20px; */
-  /* margin: 10px 5px; */
-  /* height: 300px; */
   height: 100%;
   background: #1e2d3b;
   text-align: center;
@@ -82,7 +80,8 @@ header {
   border-radius: 10px;
 }
 .card-container:hover .card-inner {
-  display: block;
+  /* display: block; */
+  opacity: 1;
 }
 .card-container .poster {
   /* position: relative;
