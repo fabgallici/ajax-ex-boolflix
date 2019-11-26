@@ -37,6 +37,7 @@ header {
 .container .card {
   padding: 10px;
   flex-basis: 25%;
+  /* height: 513px;   */
 }
 .card-container {
   position: relative;
@@ -103,7 +104,7 @@ header {
   max-width: 342px;
   max-height: 513px;
 
-  border-radius: 7px;
+  border-radius: 10px;
 
   /* height: auto;  */
   vertical-align: middle;
