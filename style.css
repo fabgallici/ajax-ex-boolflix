@@ -37,7 +37,7 @@ header {
 .container .card {
   padding: 10px;
   flex-basis: 25%;
-  /* height: 513px;   */
+  height: 513px;  
 }
 .card-container {
   position: relative;
@@ -90,10 +90,11 @@ header {
   /* width: 100%; */
 }
 /* serve helper per centrare poster-img vertical */
+/* vertical aling necessario per layout */
 .poster .post-align { 
   display: inline-block; 
   height: 100%;
-  /* vertical-align: middle; */
+  vertical-align: middle; 
 }
 .poster .poster-img {
   /* position: absolute; */
