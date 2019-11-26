@@ -42,6 +42,7 @@ var evMovData = function (arrObjMov) {
       return lang;
     }
   }
+  //ritorna url immagine se presente oppure url default se path non esiste(null)
   var checkPosterImg = function (path) {
     if (path) {
       return img_base + img_size + path;
@@ -62,7 +63,7 @@ var evMovData = function (arrObjMov) {
     console.log('title:', title, 'orig_title: ' + orig_title, 'lang ', lang, vote, "poster-img: ", poster_img);
     var lang_flag = checkFlag(lang);   
     printMovies(title, orig_title, lang_flag, starRating(vote));  //print with Handlebars
-    //alla card appena creata aggiungo l'img di background se presente;
+    //alla card appena creata aggiungo l'img di background se presente o img default;
     $('.mov-container .mov').last().css({'background-image': 'url(' + poster_img + ')'});
     // $('.movies-result').append('<li>' + 'title: ' + title + ' - orig_title: ' + orig_title + ' - lang: ' + lang + ' - vote: ' + vote + '</li>')
   }

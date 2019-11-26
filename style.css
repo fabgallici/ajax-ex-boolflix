@@ -48,6 +48,8 @@ header {
   background: #1e2d3b;
   text-align: center;
   color: white;
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 .mov li {
   list-style-type: none;
