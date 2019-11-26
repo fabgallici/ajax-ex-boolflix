@@ -16,6 +16,8 @@ var printMoviesTemp = function () {
 //SECTION EVDATA: estrazione dati da array di oggetti results e invio dati a video per ogni elemento.
 var evMovData = function (arrObjMov) {
   const supported_flags = ['it', 'en', 'fr', 'de', 'es', 'fi', 'be', 'cz', 'jp', 'us'];
+  const img_base = "https://image.tmdb.org/t/p/";
+  const img_size = "w342";
   //transformo vote in num intero da 1 a 5, creando una stringa con relative stelle fontawesome colorate e restanti vuote.
   var starRating = function (vote) {
     const voteNumBase = 10;
@@ -40,17 +42,27 @@ var evMovData = function (arrObjMov) {
       return lang;
     }
   }
+  var checkPosterImg = function (path) {
+    if (path) {
+      return img_base + img_size + path;
+    } else {
+      return 'img/empty_path.jpg';
+    }
+  }
   //INIZIO EV DATA
   var printMovies = printMoviesTemp(); // compile handlebars
   //per ogni obj json estraggo titolo, titolo originale, lingua, voto 
   for (var i = 0; i < arrObjMov.length; i++) {
-    var title = arrObjMov[i].title || arrObjMov[i].name;
+    var title = arrObjMov[i].title || arrObjMov[i].name;  //per serie tv key alternativa
     var orig_title = arrObjMov[i].original_title || arrObjMov[i].original_name;
     var lang = arrObjMov[i].original_language;
     var vote = arrObjMov[i].vote_average;
-    // console.log('title:', title, 'orig_title: ' + orig_title, 'lang ', lang, vote);
+    // var poster_img = img_base + img_size + arrObjMov[i].poster_path;
+    var poster_img = checkPosterImg(arrObjMov[i].poster_path);
+    console.log('title:', title, 'orig_title: ' + orig_title, 'lang ', lang, vote, "poster-img: ", poster_img);
     var lang_flag = checkFlag(lang);   
     printMovies(title, orig_title, lang_flag, starRating(vote));  //print with Handlebars
+
     // $('.movies-result').append('<li>' + 'title: ' + title + ' - orig_title: ' + orig_title + ' - lang: ' + lang + ' - vote: ' + vote + '</li>')
   }
 
