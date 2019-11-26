@@ -21,12 +21,16 @@
 
     <!-- music template handlebars -->
   <script id="movie-template" type="text/x-handlebars-template">
-    <ul class="mov">
-      <li><span class="mov-val">Titolo: </span><span class="mov-title">{{title}}</span></li>
-      <li><span class="mov-val">Titolo originale: </span><span class="mov-orig-title">{{orig_title}}</span></li>    
-      <li><span class="mov-val">Lingua: </span>{{{lang_flag}}}</li>
-      <li><span class="mov-val">Voto: </span><span class="mov-vote">{{{vote}}}</span></li>
-    </ul>
+    <div class="card-container">
+      <div class="card">
+        <ul class="mov">
+          <li><span class="mov-val">Titolo: </span><span class="mov-title">{{title}}</span></li>
+          <li><span class="mov-val">Titolo originale: </span><span class="mov-orig-title">{{orig_title}}</span></li>    
+          <li><span class="mov-val">Lingua: </span>{{{lang_flag}}}</li>
+          <li><span class="mov-val">Voto: </span><span class="mov-vote">{{{vote}}}</span></li>
+        </ul>
+      </div>    
+    </div>   
   </script>
 
   

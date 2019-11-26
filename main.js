@@ -64,7 +64,7 @@ var evMovData = function (arrObjMov) {
     var lang_flag = checkFlag(lang);   
     printMovies(title, orig_title, lang_flag, starRating(vote));  //print with Handlebars
     //alla card appena creata aggiungo l'img di background se presente o img default;
-    $('.mov-container .mov').last().css({'background-image': 'url(' + poster_img + ')'});
+    $('.mov-container .card-container').last().css({'background-image': 'url(' + poster_img + ')'});
     // $('.movies-result').append('<li>' + 'title: ' + title + ' - orig_title: ' + orig_title + ' - lang: ' + lang + ' - vote: ' + vote + '</li>')
   }
 
