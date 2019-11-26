@@ -6,7 +6,9 @@
 }
 
 body {
-  background: rgb(46, 58, 70);
+  /* background: rgb(46, 58, 70); */
+    background-color: #425365;
+
   min-height: 100vh;
 }
 
@@ -48,7 +50,8 @@ header {
 
   /* width: 342px;
   height: 513px; */
-
+  background-color: #354250;
+  /* background-color: #506479; */
   border: 2px solid black;
   border-radius: 10px;
   height: 100%;
