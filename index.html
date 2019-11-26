@@ -16,7 +16,7 @@
   </header>
   
 
-  <ul class="movies-result"></ul>
+  <!-- <ul class="movies-result"></ul> -->
   <div class="mov-container container"></div>
 
     <!-- music template handlebars -->
@@ -24,8 +24,9 @@
     <ul class="mov">
       <li><span class="mov-val">Titolo: </span><span class="mov-title">{{title}}</span></li>
       <li><span class="mov-val">Titolo originale: </span><span class="mov-orig-title">{{orig_title}}</span></li>
-      <li><span class="mov-val">Lingua: </span><span class="mov-lang">{{lang}}</span></li>
-      <li><span class="mov-val">Voto: </span><span class="mov-vote">{{vote}}</span></li>
+      <!-- <li><span class="mov-val">Lingua: </span><img class="mov-lang" src="{{lang_flag}}" alt="flag_img"></li> -->
+      <li><span class="mov-val">Lingua: </span>{{{lang_flag}}}</li>
+      <li><span class="mov-val">Voto: </span><span class="mov-vote">{{{vote}}}</span></li>
     </ul>
   </script>
 
