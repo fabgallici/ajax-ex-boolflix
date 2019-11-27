@@ -8,17 +8,66 @@
 body {
   background-color: #425365;
   min-height: 100vh;
+  font-size: 16px;
 }
 
+/* ---- HEADER ---- */
 header {
   width: 100%;
   height: 70px;
-  background: #1e2d3b;
+  background-color: #1e2d3b;
+}
+.head-container,
+.search-container {
   display: flex;
-  justify-content: flex-end;
+  height: 100%;
+  justify-content: space-between;
   align-items: center;
 }
+.head-container {
+  padding-left: 3%;
+  padding-right: 3%;
+}
+/* .search-container {
+  height: 35px;
+  background-color: #425365;
+} */
+.search-item #search-btn {
+  margin-left: 10px;
+  border: 2px solid #425365;
+  display: inline-block;
+  padding: 4px;
+  border-radius: 999px;
+  transition: all 0.3s ease;
+}
+.search-item #search-btn:hover {
+  background-color: rgb(129, 133, 136);
+  border: 2px solid #d5dadf;
+}
+.search-item #search-btn img {
+  vertical-align: middle;
+}
+.search-item #search-input {
+  height: 30px;
+  width: 230px;
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-size: 1.1rem;
 
+  border-color: transparent;
+  border-radius: 999px;
+}
+
+input::placeholder {
+  color: #a0a0a0;
+}
+/* remove focus border */
+textarea:focus,
+input:focus {
+  outline: none;
+}
+
+/* ---- FINE HEADER ---- */
 .container {
   height: 100%;
   margin: 0 auto;
@@ -107,9 +156,9 @@ altrimenti img height diverse, container di diversa altezza*/
   visibility: hidden;
 }
 .card:hover {
--webkit-box-shadow: 6px 6px 6px 1px rgba(0,0,0,0.65);
--moz-box-shadow: 6px 6px 6px 1px rgba(0,0,0,0.65);
-box-shadow: 6px 6px 6px 1px rgba(0,0,0,0.65)
+  -webkit-box-shadow: 6px 6px 6px 1px rgba(0, 0, 0, 0.65);
+  -moz-box-shadow: 6px 6px 6px 1px rgba(0, 0, 0, 0.65);
+  box-shadow: 6px 6px 6px 1px rgba(0, 0, 0, 0.65);
 }
 .mov li {
   list-style-type: none;
@@ -126,19 +175,27 @@ box-shadow: 6px 6px 6px 1px rgba(0,0,0,0.65)
 }
 
 /*--- Media Query ---*/
-@media screen and (min-width:768px) and (max-width:1024px) {
+@media screen and (min-width: 768px) and (max-width: 1024px) {
   .container .card {
     flex-basis: 30%; /* 33% - 3 % margin */
   }
 }
 /* Small xs */
-@media screen and (min-width:576px) and (max-width:767px) {
+@media screen and (min-width: 576px) and (max-width: 767px) {
   .container .card {
     flex-basis: 47%;
   }
 }
 /* Extra Small xxs */
-@media screen and (max-width:575px) {
+@media screen and (max-width: 575px) {
+  header {
+    height: auto;
+    padding-bottom: 5%;
+  }
+
+  .head-container {
+    flex-direction: column;
+  }
   .container .card {
     flex-basis: 95%;
     min-width: 200px;
