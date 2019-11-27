@@ -6,11 +6,6 @@ var printMoviesTemp = function () {
   var source = document.getElementById('movie-template').innerHTML; //compilazione handle esterna per opt
   var movieTemplate = Handlebars.compile(source);
 
-  // return function (title, orig_title, lang_flag, vote, poster_img) { //ritorna funz per riempire contenuto
-  //   var movieData = { title: title, orig_title: orig_title, lang_flag: lang_flag, vote: vote, poster_img: poster_img };
-  //   var htmlMovieData = movieTemplate(movieData);
-  //   $('.mov-container.container').append(htmlMovieData);
-  // };
   return function (card) { //ritorna funz per riempire contenuto
     var movieData = card ;
     var htmlMovieData = movieTemplate(movieData);
@@ -30,30 +25,36 @@ var evMovData = function (arrObjMov) {
     var starsHtml = "";
     var starsVote = Math.floor((vote * maxStars) / voteNumBase);
     for (var i = 1; i <= maxStars; i++) {
-      if (starsVote > 0) {
-        starsHtml += '<i class="fas fa-star yellow"></i>';
-        starsVote--;
-      } else {
-        starsHtml += '<i class="fas fa-star black"></i>';
-      }
+      // if (starsVote > 0) {
+      //   starsHtml += '<i class="fas fa-star yellow"></i>';
+      //   starsVote--;
+      // } else {
+      //   starsHtml += '<i class="fas fa-star black"></i>';
+      // }
+      starsHtml += (i <= starsVote)   //short version
+        ? '<i class="fas fa-star yellow"></i>'
+        : '<i class="fas fa-star black"></i>';
     }
     return starsHtml;
   }
   //controllo flag: se lang supportata ritorno stringa per img attr flag corrispondente atrimenti attr not found
   var checkFlag = function (lang) {
-    if (supported_flags.includes(lang)) {
-      return '<img src="img/flags/' + lang + '.png" alt="flag_img"></img>';
-    } else {
-      return lang;
-    }
+    // if (supported_flags.includes(lang)) {
+    //   return '<img src="img/flags/' + lang + '.png" alt="flag_img"></img>';
+    // } else {   //else si può omettere
+    //   return lang;
+    // }
+    return supported_flags.includes(lang)   //short version
+      ? '<img src="img/flags/' + lang + '.png" alt="flag_img"></img>'
+      : lang;
   }
   //ritorna url immagine se presente oppure url default se path non esiste(null)
   var checkPosterImg = function (path) {
-    if (path) {
-      return img_base + img_size + path;
-    } else {
-      return 'img/empty_path.jpg';
-    }
+    // if (path) {
+    //   return img_base + img_size + path;
+    // } 
+    // return 'img/empty_path.jpg';   
+    return path ? img_base + img_size + path : 'img/empty_path.jpg';
   }
   //INIZIO EV DATA
   var printMovies = printMoviesTemp(); // compile handlebars
