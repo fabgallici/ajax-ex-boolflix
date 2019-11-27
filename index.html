@@ -47,10 +47,19 @@
           <div class="poster"><span class="post-align"></span><img class="poster-img" src="{{poster_img}}" alt="poster_image"></div>
           <div class="card-inner">
             <ul class="mov">
-              <li><div class="mov-title">Titolo: </div><span class="mov-val">{{title}}</span></li>
-              <li><div class="mov-title">Titolo originale: </div><span class="mov-val">{{orig_title}}</span></li>    
-              <li><span>Lingua: </span>{{{lang_flag}}}</li>
-              <li><span>Voto: </span><span class="mov-vote">{{{vote}}}</span></li>
+              <li>
+                <div class="mov-title">Titolo: </div>
+                <span class="mov-val">{{title}}</span>
+              </li>
+              <li>
+                <div class="mov-title">Titolo originale: </div>
+                <span class="mov-val">{{orig_title}}</span>
+              </li>    
+              <li><span class="mov-title mov-lang">Lingua: </span>{{{lang_flag}}}</li>
+              <li>
+                <span class="mov-title">Voto: </span>
+                <span class="mov-vote">{{vote}} -</span><span class="mov-stars">{{{stars}}}</span>
+              </li>
             </ul>
           </div> 
         </div>

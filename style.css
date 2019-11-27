@@ -178,18 +178,26 @@ altrimenti img height diverse, container di diversa altezza*/
 .mov-val {
   font-weight: bold;
 }
-.mov-vote .yellow {
+.mov-stars .yellow {
   color: yellow;
 }
-.mov-vote .black {
+.mov-stars .black {
   color: #000;
 }
-
+.mov-vote {
+  margin: 0 5px;
+  display: inline-block;
+}
+/* lang img align */
+.mov-lang { 
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 10px;
+}
 /* --- No Results Section --- */
 .no-results-container {
   width: 100%;
   margin: auto;
-  
   display: none;
 }
 .no-results-container.show {

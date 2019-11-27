@@ -51,7 +51,8 @@ var evMovData = function (arrObjMov) {
       title : movObj.title || movObj.name, //per serie tv key alternativa
       orig_title : movObj.original_title || movObj.original_name,
       lang_flag : checkFlag(lang),  
-      vote : starRating(movObj.vote_average),       
+      vote: movObj.vote_average,
+      stars : starRating(movObj.vote_average),       
       poster_img : checkPosterImg(movObj.poster_path)
     }
     // console.log('card n°: ', i, '  -  ', card);
