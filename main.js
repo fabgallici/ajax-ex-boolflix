@@ -77,14 +77,12 @@ var searchMovie = function (queryStr, type_src) {
     success: function (data) {
       var results = data.results;
       console.log(results);
-      if (results.length > 0) {
-        if (type_src === "movie") { //ad ogni ricerca positiva di movie cancello tutte le ricerche precedenti
-          $('.mov-container.container').empty(); 
-        }     
+      if (results.length > 0) {  
         $('#search-input').val(''); //cancellazione campo input dopo ricerca positiva
         evMovData(results);  //elaborazione dati e successivo invio a schermo
       } else {
-        console.log('no results found');
+        // console.log('no results found');
+        $('.no-results-container').addClass('show'); //screen show error msg
       }
 
     },
@@ -106,18 +104,21 @@ $(document).ready(function () {
       var newStr = arr.join('+');
       return newStr;
     }
+    //clear screen prev search
     //get input field, call convert string, call searchMovie
-    var getInputAndSearch = function () {
+    var getInputSearchClear = function () {
+      $('.mov-container.container').empty(); 
+      $('.no-results-container').removeClass('show');
       var queryStr = $('#search-input').val();
       var evQueryStr = evInput(queryStr);
       searchMovie(evQueryStr, mov_src);  //invio dati per ricerca film e poi serie tv
       searchMovie(evQueryStr, tv_src);
     }
-    $('#search-btn').on('click', getInputAndSearch);
+    $('#search-btn').on('click', getInputSearchClear);
 
     $('#search-input').keypress(function (e) {
       if (e.keyCode === 13 || e.which === 13) {
-        getInputAndSearch();
+        getInputSearchClear();
       }
     })
 
