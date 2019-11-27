@@ -69,15 +69,9 @@ var evMovData = function (arrObjMov) {
       vote : starRating(movObj.vote_average),       
       poster_img : checkPosterImg(movObj.poster_path)
     }
-    console.log('card n°: ', i, '  -  ', card);
-    // console.log('title:', title, 'orig_title: ' + orig_title, 'lang ', lang, vote, "poster-img: ", poster_img);
-    
-    //alla card appena creata aggiungo l'img di background se presente o img default;
+    // console.log('card n°: ', i, '  -  ', card);
+    //print video with handlebars
     printMovies(card);
-    // printMovies(title, orig_title, lang_flag, starRating(vote), poster_img);  //print with Handlebars
-    
-    // $('.mov-container .card-container').last().css({'background-image': 'url(' + poster_img + ')'});
-    // $('.movies-result').append('<li>' + 'title: ' + title + ' - orig_title: ' + orig_title + ' - lang: ' + lang + ' - vote: ' + vote + '</li>')
   }
 
 }
@@ -150,30 +144,3 @@ $(document).ready(function () {
 
 });
 
-
-
-
-
-
-// https://api.themoviedb.org/3/search/movie?api_key=6dd01b7265c335fd46cc94907c9fefc1&query=ritorno+al+futuro
-
-    //gestione errore lang flag img not found da rivedere
-    // $('.mov img').on('error', function () {
-    //   console.log('img error');
-    //   $(this).siblings('.mov-lang').addClass('show-text');
-    // })
-
-        //non funziona con delegation, con click al posto di error funziona 
-    // $('.mov-container').on('error', 'img', function() {
-    //   console.log('img error');
-    //   // $(this).closest('.mov-lang').html('test');
-    // })
-
-    //SECTION UI: visualizza dati film creando nuovo template handlebars
-// var printMoviesTemp = function (title, orig_title, lang_flag, vote) {
-//   var source = document.getElementById('movie-template').innerHTML;
-//   var movieTemplate = Handlebars.compile(source);
-//   var movieData = { title: title, orig_title: orig_title, lang_flag: lang_flag, vote: vote };
-//   var htmlMovieData = movieTemplate(movieData);
-//   $('.mov-container.container').append(htmlMovieData);
-// };
