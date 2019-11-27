@@ -170,9 +170,13 @@ altrimenti img height diverse, container di diversa altezza*/
 .mov li {
   list-style-type: none;
 }
+.mov-title {
+  text-decoration: underline;
+  text-transform: uppercase;
+  margin-bottom: 3px;
+}
 .mov-val {
   font-weight: bold;
-  text-decoration: underline;
 }
 .mov-vote .yellow {
   color: yellow;
