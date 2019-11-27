@@ -14,8 +14,11 @@ body {
 /* ---- HEADER ---- */
 header {
   width: 100%;
-  height: 70px;
-  background-color: #1e2d3b;
+  height: 90px;
+  padding-bottom: 10px;
+  /* background-color: #1e2d3b; */
+  background: rgb(30,45,59);
+  background: linear-gradient(180deg, rgba(30,45,59,1) 84%, rgba(66,83,101,1) 100%);
 }
 .head-container,
 .search-container {
@@ -28,10 +31,7 @@ header {
   padding-left: 3%;
   padding-right: 3%;
 }
-/* .search-container {
-  height: 35px;
-  background-color: #425365;
-} */
+
 .search-item #search-btn {
   margin-left: 10px;
   border: 2px solid #425365;
@@ -79,7 +79,7 @@ input:focus {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-  padding: 50px 0;
+  padding: 20px 0;
 }
 
 .mov-container .card {
@@ -139,6 +139,9 @@ altrimenti img height diverse, container di diversa altezza*/
   height: 100%;
   text-align: center;
 }
+.card:hover {
+  cursor: pointer;
+}
 /* serve helper per centrare poster-img vertical */
 /* vertical aling necessario per layout */
 .poster .post-align {
@@ -190,7 +193,7 @@ altrimenti img height diverse, container di diversa altezza*/
 @media screen and (max-width: 575px) {
   header {
     height: auto;
-    padding-bottom: 5%;
+    padding-bottom: 40px;
   }
 
   .head-container {
