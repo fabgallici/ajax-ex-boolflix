@@ -6,8 +6,13 @@ var printMoviesTemp = function () {
   var source = document.getElementById('movie-template').innerHTML; //compilazione handle esterna per opt
   var movieTemplate = Handlebars.compile(source);
 
-  return function (title, orig_title, lang_flag, vote, poster_img) { //ritorna funz per riempire contenuto
-    var movieData = { title: title, orig_title: orig_title, lang_flag: lang_flag, vote: vote, poster_img: poster_img };
+  // return function (title, orig_title, lang_flag, vote, poster_img) { //ritorna funz per riempire contenuto
+  //   var movieData = { title: title, orig_title: orig_title, lang_flag: lang_flag, vote: vote, poster_img: poster_img };
+  //   var htmlMovieData = movieTemplate(movieData);
+  //   $('.mov-container.container').append(htmlMovieData);
+  // };
+  return function (card) { //ritorna funz per riempire contenuto
+    var movieData = card ;
     var htmlMovieData = movieTemplate(movieData);
     $('.mov-container.container').append(htmlMovieData);
   };
@@ -15,7 +20,7 @@ var printMoviesTemp = function () {
 
 //SECTION EVDATA: estrazione dati da array di oggetti results e invio dati a video per ogni elemento.
 var evMovData = function (arrObjMov) {
-  const supported_flags = ['it', 'en', 'fr', 'de', 'es', 'fi', 'be', 'cz', 'jp', 'us'];
+  const supported_flags = ['it', 'en', 'fr', 'de', 'es', 'fi', 'be', 'cz', 'ja', 'us'];
   const img_base = "https://image.tmdb.org/t/p/";
   const img_size = "w342";
   //transformo vote in num intero da 1 a 5, creando una stringa con relative stelle fontawesome colorate e restanti vuote.
@@ -23,7 +28,7 @@ var evMovData = function (arrObjMov) {
     const voteNumBase = 10;
     const maxStars = 5;
     var starsHtml = "";
-    var starsVote = parseInt((vote * maxStars) / voteNumBase);
+    var starsVote = Math.floor((vote * maxStars) / voteNumBase);
     for (var i = 1; i <= maxStars; i++) {
       if (starsVote > 0) {
         starsHtml += '<i class="fas fa-star yellow"></i>';
@@ -54,15 +59,21 @@ var evMovData = function (arrObjMov) {
   var printMovies = printMoviesTemp(); // compile handlebars
   //per ogni obj json estraggo titolo, titolo originale, lingua, voto 
   for (var i = 0; i < arrObjMov.length; i++) {
-    var title = arrObjMov[i].title || arrObjMov[i].name;  //per serie tv key alternativa
-    var orig_title = arrObjMov[i].original_title || arrObjMov[i].original_name;
-    var lang = arrObjMov[i].original_language;
-    var vote = arrObjMov[i].vote_average;  
+    var movObj = arrObjMov[i];
+    var lang = movObj.original_language;
+    var card = {
+      title : movObj.title || movObj.name, //per serie tv key alternativa
+      orig_title : movObj.original_title || movObj.original_name,
+      lang_flag : checkFlag(lang),  
+      vote : starRating(movObj.vote_average),       
+      poster_img : checkPosterImg(movObj.poster_path)
+    }
+    console.log('card n°: ', i, '  -  ', card);
     // console.log('title:', title, 'orig_title: ' + orig_title, 'lang ', lang, vote, "poster-img: ", poster_img);
-    var lang_flag = checkFlag(lang);   
+    
     //alla card appena creata aggiungo l'img di background se presente o img default;
-    var poster_img = checkPosterImg(arrObjMov[i].poster_path);
-    printMovies(title, orig_title, lang_flag, starRating(vote), poster_img);  //print with Handlebars
+    printMovies(card);
+    // printMovies(title, orig_title, lang_flag, starRating(vote), poster_img);  //print with Handlebars
     
     // $('.mov-container .card-container').last().css({'background-image': 'url(' + poster_img + ')'});
     // $('.movies-result').append('<li>' + 'title: ' + title + ' - orig_title: ' + orig_title + ' - lang: ' + lang + ' - vote: ' + vote + '</li>')
@@ -87,7 +98,7 @@ var searchMovie = function (queryStr, type_src) {
       var results = data.results;
       console.log(results);
       if (results.length > 0) {
-        if (type_src === "movie") { //ad ogni ricerca di movie cancello tutte le ricerche precedenti
+        if (type_src === "movie") { //ad ogni ricerca positiva di movie cancello tutte le ricerche precedenti
           $('.mov-container.container').empty(); 
         }     
         $('#search-input').val(''); //cancellazione campo input dopo ricerca positiva

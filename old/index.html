@@ -16,17 +16,25 @@
   </header>
   
 
-  <ul class="movies-result"></ul>
+  <!-- <ul class="movies-result"></ul> -->
   <div class="mov-container container"></div>
 
     <!-- music template handlebars -->
   <script id="movie-template" type="text/x-handlebars-template">
-    <ul class="mov">
-      <li><span class="mov-val">Titolo: </span><span class="mov-title">{{title}}</span></li>
-      <li><span class="mov-val">Titolo originale: </span><span class="mov-orig-title">{{orig_title}}</span></li>
-      <li><span class="mov-val">Lingua: </span><span class="mov-lang">{{lang}}</span></li>
-      <li><span class="mov-val">Voto: </span><span class="mov-vote">{{vote}}</span></li>
-    </ul>
+    <div class="card">
+      <div class="card-container">
+        <div class="poster"><span class="post-align"></span><img class="poster-img" src="{{poster_img}}" alt="poster_image"></div>
+        <div class="card-inner">
+          <ul class="mov">
+            <li><span class="mov-val">Titolo: </span><span class="mov-title">{{title}}</span></li>
+            <li><span class="mov-val">Titolo originale: </span><span class="mov-orig-title">{{orig_title}}</span></li>    
+            <li><span class="mov-val">Lingua: </span>{{{lang_flag}}}</li>
+            <li><span class="mov-val">Voto: </span><span class="mov-vote">{{{vote}}}</span></li>
+          </ul>
+        </div>    
+      </div> 
+    </div>
+  
   </script>
 
   
@@ -36,3 +44,6 @@
   <script src="main.js"></script>
 </body>
 </html>
+
+
+<!-- <li><span class="mov-val">Lingua: </span><img class="mov-lang" src="{{lang_flag}}" alt="flag_img"></li> -->
