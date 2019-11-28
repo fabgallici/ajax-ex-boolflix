@@ -70,7 +70,16 @@ textarea:focus,
 input:focus {
   outline: none;
 }
-
+/* Search Title */
+.search-title {
+  text-align: center;
+  color: #00e5e5;
+  font-size: 1.4rem;
+  text-transform: uppercase;
+  font-weight: 900;
+  letter-spacing: 0.1rem;
+  padding: 20px 0 10px;
+}
 /* ---- FINE HEADER ---- */
 .container {
   height: 100%;
@@ -83,7 +92,7 @@ input:focus {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-  padding: 20px 0;
+  padding: 10px 0;
 }
 
 .mov-container .card {
