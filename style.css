@@ -79,7 +79,11 @@ input:focus {
   font-weight: 900;
   letter-spacing: 0.1rem;
   padding: 20px 0 10px;
+  display: none;
 }
+.search-title.show {
+  display: block; 
+ } 
 /* ---- FINE HEADER ---- */
 .container {
   height: 100%;
@@ -204,12 +208,12 @@ altrimenti img height diverse, container di diversa altezza*/
   margin-right: 10px;
 }
 /* --- No Results Section --- */
-.no-results-container {
+#no-results-container {
   width: 100%;
   margin: auto;
   display: none;
 }
-.no-results-container.show {
+#no-results-container.movie.tv {
   display: block;
 }
 .no-results {

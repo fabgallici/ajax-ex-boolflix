@@ -10,6 +10,7 @@ var printMoviesTemp = function () {
     var movieData = card;
     var htmlMovieData = movieTemplate(movieData);
     $('.mov-container.container[data-type="' + type_src + '"]').append(htmlMovieData);
+    $('.search-title[data-title="' + type_src + '"]').addClass('show');
   };
 };
 
@@ -86,7 +87,8 @@ var searchMovie = function (queryStr, url, type_src) {
         evMovData(results, type_src);  //elaborazione dati e successivo invio a schermo
       } else {
         // console.log('no results found');
-        $('.no-results-container').addClass('show'); //screen show error msg
+        $('#no-results-container').addClass(type_src); //screen show error msg
+
       }
 
     },
@@ -112,8 +114,9 @@ $(document).ready(function () {
     //clear screen prev search
     //get input field, call convert string, call searchMovie
     var getInputSearchClear = function () {
-      $('.mov-container.container').empty();
-      $('.no-results-container').removeClass('show'); //messaggio ricerca not found
+      $('.mov-container.container').empty();  //clear container movies e tv series
+      $('.search-title').removeClass('show'); //remove all search title
+      $('#no-results-container').removeClass(); //reset msg errore ricerca not found
       var queryStr = $('#search-input').val();
       var evQueryStr = evInput(queryStr);
       searchMovie(evQueryStr, url, mov_src);  //invio dati per ricerca film e poi serie tv
