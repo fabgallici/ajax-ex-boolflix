@@ -6,10 +6,10 @@ var printMoviesTemp = function () {
   var source = document.getElementById('movie-template').innerHTML; //compilazione handle esterna per opt
   var movieTemplate = Handlebars.compile(source);
 
-  return function (card) { //ritorna funz per riempire contenuto
+  return function (card, type_src) { //ritorna funz per riempire contenuto
     var movieData = card;
     var htmlMovieData = movieTemplate(movieData);
-    $('.mov-container.container').append(htmlMovieData);
+    $('.mov-container.container[data-type="' + type_src + '"]').append(htmlMovieData);
   };
 };
 
@@ -60,7 +60,7 @@ var evMovData = function (arrObjMov, type_src) {
     }
     // console.log('card n°: ', i, '  -  ', card);
     //print video with handlebars
-    printMovies(card);
+    printMovies(card, type_src);
   }
 
 }
