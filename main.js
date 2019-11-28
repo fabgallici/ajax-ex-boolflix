@@ -7,17 +7,18 @@ var printMoviesTemp = function () {
   var movieTemplate = Handlebars.compile(source);
 
   return function (card) { //ritorna funz per riempire contenuto
-    var movieData = card ;
+    var movieData = card;
     var htmlMovieData = movieTemplate(movieData);
     $('.mov-container.container').append(htmlMovieData);
   };
 };
 
 //SECTION EVDATA: estrazione dati da array di oggetti results e invio dati a video per ogni elemento.
-var evMovData = function (arrObjMov) {
+var evMovData = function (arrObjMov, type_src) {
   const supported_flags = ['it', 'en', 'fr', 'de', 'es', 'fi', 'be', 'cz', 'ja', 'us'];
   const img_base = "https://image.tmdb.org/t/p/";
   const img_size = "w342";
+  var title, movObj, lang;
   //transformo vote in num intero da 1 a 5, creando una stringa con relative stelle fontawesome colorate e restanti vuote.
   var starRating = function (vote) {
     const voteNumBase = 10;
@@ -45,15 +46,17 @@ var evMovData = function (arrObjMov) {
   var printMovies = printMoviesTemp(); // compile handlebars
   //per ogni obj json estraggo titolo, titolo originale, lingua, voto 
   for (var i = 0; i < arrObjMov.length; i++) {
-    var movObj = arrObjMov[i];
-    var lang = movObj.original_language;
-    var card = {
-      title : movObj.title || movObj.name, //per serie tv key alternativa
-      orig_title : movObj.original_title || movObj.original_name,
-      lang_flag : checkFlag(lang),  
+    movObj = arrObjMov[i];
+    lang = movObj.original_language;
+    var title = (type_src == "movie" ? movObj.title : movObj.name);
+    var orig_title = (type_src == "movie" ? movObj.original_title : movObj.original_name);
+    var card = {  //obj card per print
+      title: title,
+      orig_title: orig_title,
+      lang_flag: checkFlag(lang),
       vote: movObj.vote_average,
-      stars : starRating(movObj.vote_average),       
-      poster_img : checkPosterImg(movObj.poster_path)
+      stars: starRating(movObj.vote_average),
+      poster_img: checkPosterImg(movObj.poster_path)
     }
     // console.log('card n°: ', i, '  -  ', card);
     //print video with handlebars
@@ -63,12 +66,12 @@ var evMovData = function (arrObjMov) {
 }
 
 //SECTION Ajax call ricerca query
-var searchMovie = function (queryStr, type_src) {
+var searchMovie = function (queryStr, url, type_src) {
   const apiKey = "6dd01b7265c335fd46cc94907c9fefc1";
   const lang_It = "it-IT";
   // console.log('queryStr', queryStr);
   $.ajax({
-    url: "https://api.themoviedb.org/3/search/" + type_src,
+    url: url + type_src,
     method: "GET",
     data: {
       api_key: apiKey,
@@ -78,9 +81,9 @@ var searchMovie = function (queryStr, type_src) {
     success: function (data) {
       var results = data.results;
       console.log(results);
-      if (results.length > 0) {  
+      if (results.length > 0) {
         $('#search-input').val(''); //cancellazione campo input dopo ricerca positiva
-        evMovData(results);  //elaborazione dati e successivo invio a schermo
+        evMovData(results, type_src);  //elaborazione dati e successivo invio a schermo
       } else {
         // console.log('no results found');
         $('.no-results-container').addClass('show'); //screen show error msg
@@ -97,6 +100,7 @@ $(document).ready(function () {
 
   //SECTION controller: get input and start program
   var controller = function () {
+    var url = "https://api.themoviedb.org/3/search/";
     var mov_src = "movie";
     var tv_src = "tv";
     //concatenazione stringa con +
@@ -108,12 +112,12 @@ $(document).ready(function () {
     //clear screen prev search
     //get input field, call convert string, call searchMovie
     var getInputSearchClear = function () {
-      $('.mov-container.container').empty(); 
-      $('.no-results-container').removeClass('show');
+      $('.mov-container.container').empty();
+      $('.no-results-container').removeClass('show'); //messaggio ricerca not found
       var queryStr = $('#search-input').val();
       var evQueryStr = evInput(queryStr);
-      searchMovie(evQueryStr, mov_src);  //invio dati per ricerca film e poi serie tv
-      searchMovie(evQueryStr, tv_src);
+      searchMovie(evQueryStr, url, mov_src);  //invio dati per ricerca film e poi serie tv
+      searchMovie(evQueryStr, url, tv_src);
     }
     $('#search-btn').on('click', getInputSearchClear);
 
