@@ -6,11 +6,10 @@ var printMoviesTemp = function () {
   var source = document.getElementById('movie-template').innerHTML; //compilazione handle esterna per opt
   var movieTemplate = Handlebars.compile(source);
 
-  return function (card, type_src) { //ritorna funz per riempire contenuto
+  return function (card) { //ritorna funz per riempire contenuto
     var movieData = card;
     var htmlMovieData = movieTemplate(movieData);
-    $('.mov-container.container[data-type="' + type_src + '"]').append(htmlMovieData);
-    $('.search-title[data-title="' + type_src + '"]').addClass('show');
+    $('.mov-container.container[data-type="' + card.type_src + '"]').append(htmlMovieData);  
   };
 };
 
@@ -57,11 +56,14 @@ var evMovData = function (arrObjMov, type_src) {
       lang_flag: checkFlag(lang),
       vote: movObj.vote_average,
       stars: starRating(movObj.vote_average),
-      poster_img: checkPosterImg(movObj.poster_path)
+      poster_img: checkPosterImg(movObj.poster_path),
+      type_src: type_src
     }
     // console.log('card n°: ', i, '  -  ', card);
     //print video with handlebars
-    printMovies(card, type_src);
+    printMovies(card);
+    //show title Lista Film o Tv serie
+    $('.search-title[data-title="' + type_src + '"]').addClass('show');
   }
 
 }
