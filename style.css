@@ -42,11 +42,14 @@ header {
   display: inline-block;
   padding: 4px;
   border-radius: 999px;
-  transition: all 0.3s ease;
 }
-.search-item #search-btn:hover {
+.search-item #search-btn:hover,
+.search-item #search-btn.btn-bg-eff {
   background-color: rgb(129, 133, 136);
   border: 2px solid #d5dadf;
+}
+.search-item #search-btn:hover {
+  transition: all 0.3s linear; 
 }
 .search-item #search-btn img {
   vertical-align: middle;

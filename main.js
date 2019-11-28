@@ -105,11 +105,18 @@ $(document).ready(function () {
     var url = "https://api.themoviedb.org/3/search/";
     var mov_src = "movie";
     var tv_src = "tv";
-    //concatenazione stringa con +
+    //concatenazione stringa con + 
     var evInput = function (str) {
       var arr = str.toLowerCase().split(' ');
       var newStr = arr.join('+');
       return newStr;
+    }
+    //effect button bg
+    var btnBgEff = function() {
+      $('#search-btn').addClass('btn-bg-eff');
+      setTimeout(function () {
+        $('#search-btn').removeClass('btn-bg-eff');
+      }, 200);
     }
     //clear screen prev search
     //get input field, call convert string, call searchMovie
@@ -119,14 +126,17 @@ $(document).ready(function () {
       $('#no-results-container').removeClass(); //reset msg errore ricerca not found
       var queryStr = $('#search-input').val();
       var evQueryStr = evInput(queryStr);
-      searchMovie(evQueryStr, url, mov_src);  //invio dati per ricerca film e poi serie tv
-      searchMovie(evQueryStr, url, tv_src);
+      if (evQueryStr !== null && evQueryStr !== "") {         // controllo se stringa non valida
+        searchMovie(evQueryStr, url, mov_src);  //invio dati per ricerca film e poi serie tv
+        searchMovie(evQueryStr, url, tv_src);
+      }
     }
     $('#search-btn').on('click', getInputSearchClear);
 
     $('#search-input').keypress(function (e) {
       if (e.keyCode === 13 || e.which === 13) {
         getInputSearchClear();
+        btnBgEff(); //change bg btn effect when press enter
       }
     })
 
