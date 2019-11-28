@@ -40,7 +40,7 @@ var evMovData = function (arrObjMov, type_src) {
   }
   //ritorna url immagine se presente oppure url default se path non esiste(null)
   var checkPosterImg = function (path) {
-    return path ? img_base + img_size + path : 'img/empty_path.jpg';
+    return path ? img_base + img_size + path : 'img/empty-path.jpg';
   }
   //INIZIO EV DATA
   var printMovies = printMoviesTemp(); // compile handlebars
