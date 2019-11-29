@@ -88,6 +88,8 @@ input:focus {
   display: block; 
  } 
 /* ---- FINE HEADER ---- */
+
+/* ---- CARDS MAIN CONTAINER ---- */
 .container {
   height: 100%;
   margin: 0 auto;
@@ -210,6 +212,8 @@ altrimenti img height diverse, container di diversa altezza*/
   vertical-align: middle;
   margin-right: 10px;
 }
+/* --- FINE MAIN CONTAINER --- */
+
 /* --- No Results Section --- */
 #no-results-container {
   width: 100%;
