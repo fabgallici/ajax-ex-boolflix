@@ -122,13 +122,13 @@ $(document).ready(function () {
     }
     //clear screen prev search
     //get input field, call convert string, call searchMovie
-    var getInputSearchClear = function () {
-      $('.mov-container.container').empty();  //clear container movies e tv series
-      $('.search-title').removeClass('show'); //remove all search title
-      $('#no-results-container').removeClass(); //reset msg errore ricerca not found
-      var queryStr = $('#search-input').val();
-      var evQueryStr = evInput(queryStr);
-      if (evQueryStr !== null && evQueryStr !== "") {         // controllo se stringa non valida
+    var getInputSearchClear = function () {    
+      var queryStr = $('#search-input').val();      
+      if (queryStr !== null && queryStr !== "") {         // controllo se stringa non valida
+        $('.mov-container.container').empty();  //clear container movies e tv series
+        $('.search-title').removeClass('show'); //remove all search title
+        $('#no-results-container').removeClass(); //reset msg errore ricerca not found
+        var evQueryStr = evInput(queryStr);
         searchMovie(evQueryStr, url, mov_src);  //invio dati per ricerca film e poi serie tv
         searchMovie(evQueryStr, url, tv_src);
       }
